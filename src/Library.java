@@ -1,10 +1,6 @@
 import java.sql.*;
-import java.util.ArrayList;
-import java.util.Comparator;
 
 public class Library {
-
-    private ArrayList<Book> books = new ArrayList<>();
 
     // CREATE
     public void addBookToDatabase(Book book) {
@@ -28,14 +24,34 @@ public class Library {
     }
 
     // READ
-    public void readBooksFromDatabase() {
+    public void readBooksFromDatabase(int sortChoice) {
+
         String sql = "SELECT * FROM books";
+
+        switch (sortChoice) {
+            case 1:
+                sql += " ORDER BY title ASC";
+                break;
+            case 2:
+                sql += " ORDER BY author ASC";
+                break;
+            case 3:
+                sql += " ORDER BY isbn ASC";
+                break;
+            case 4:
+                sql += " ORDER BY available DESC";
+                break;
+            default:
+                // no sort
+                break;
+        }
 
         try (Connection conn = DatabaseConnection.getConnection();
              Statement stmt = conn.createStatement();
              ResultSet rs = stmt.executeQuery(sql)) {
 
-            System.out.println("\n Books in database: ");
+            System.out.println("\nBooks in database:");
+
             while (rs.next()) {
                 System.out.println(
                         rs.getString("isbn") + " | " +
@@ -49,6 +65,7 @@ public class Library {
             e.printStackTrace();
         }
     }
+
 
     // UPDATE
     public void updateAvailability(String isbn, boolean available) {

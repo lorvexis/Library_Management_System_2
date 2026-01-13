@@ -39,8 +39,20 @@ public class Main {
                     break;
 
                 case 2:
-                    library.readBooksFromDatabase();
+                    System.out.println("Sort books by:");
+                    System.out.println("1. Title");
+                    System.out.println("2. Author");
+                    System.out.println("3. ISBN");
+                    System.out.println("4. Availability");
+                    System.out.println("0. No sorting");
+
+                    System.out.print("Choose option: ");
+                    int sortChoice = scanner.nextInt();
+                    scanner.nextLine();
+
+                    library.readBooksFromDatabase(sortChoice);
                     break;
+
 
                 case 3:
                     System.out.print("Enter ISBN: ");
