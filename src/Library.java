@@ -35,7 +35,7 @@ public class Library {
              Statement stmt = conn.createStatement();
              ResultSet rs = stmt.executeQuery(sql)) {
 
-            System.out.println("\n--- Books in database ---");
+            System.out.println("\n Books in database ");
             while (rs.next()) {
                 System.out.println(
                         rs.getString("isbn") + " | " +
