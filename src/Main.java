@@ -1,3 +1,4 @@
+import java.sql.SQLOutput;
 import java.util.Scanner;
 
 public class Main {
@@ -13,6 +14,7 @@ public class Main {
             System.out.println("2. View all books");
             System.out.println("3. Update book availability");
             System.out.println("4. Delete book");
+            System.out.println("5. Add member");
             System.out.println("0. Exit");
 
             System.out.print("Choose option: ");
@@ -69,6 +71,18 @@ public class Main {
                     String deleteIsbn = scanner.nextLine();
 
                     library.deleteBook(deleteIsbn);
+                    break;
+
+                case 5:
+                    System.out.println("Enter ID: ");
+                    int memberID = scanner.nextInt();
+                    scanner.nextLine();
+
+                    System.out.println("Enter name: ");
+                    String memberName = scanner.nextLine();
+
+                    LibraryMember member = new LibraryMember(memberID, memberName);
+                    library.AddmembertoDatabase(member);
                     break;
 
                 case 0:

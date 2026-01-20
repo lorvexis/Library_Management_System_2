@@ -1,3 +1,4 @@
+import javax.xml.crypto.Data;
 import java.sql.*;
 
 public class Library {
@@ -100,4 +101,23 @@ public class Library {
             e.printStackTrace();
         }
     }
+
+    public void AddmembertoDatabase(LibraryMember member) {
+        String sql = "INSERT INTO members(member_id, name) VALUES (?, ?)";
+
+        try (Connection conn = DatabaseConnection.getConnection();
+             PreparedStatement stmt = conn.prepareStatement(sql)) {
+
+            stmt.setInt(1, member.getMemberId());
+            stmt.setString(2, member.getName());
+
+            stmt.executeUpdate();
+            System.out.println("Member added");
+
+        } catch(SQLException e) {
+            e.printStackTrace();
+        }
+
+    }
+
 }
